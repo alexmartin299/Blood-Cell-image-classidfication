@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+0# -*- coding: utf-8 -*-
 """
 Created on Wed Aug 19 12:24:21 2020
 
@@ -15,7 +15,6 @@ import numpy as np
 
 rgb = plt.imread('celula.jpeg')
 rgb2 = plt.imread('celula2.jpeg')
-rgb3 = plt.imread('foto.jpeg')
 m,n,l = rgb.shape
 o,p,q = rgb2.shape
 r,l,s = rgb3.shape
