@@ -11,7 +11,7 @@ import sklearn.cluster as sk
 import glob
 import os
 import numpy as np
-"""importacio d'imatges per entrenar el model KMeans y poder fer la posterios segmentacio"""
+"""import images for usage of sk.kmeans to make segmentation"""
 
 rgb = plt.imread('celula.jpeg')
 rgb2 = plt.imread('celula2.jpeg')
@@ -28,13 +28,12 @@ rgbr[:,:,4] = rgb2[:,:,1]
 rgbr[:,:,5] = rgb2[:,:,2]
 
 vectores = np.reshape(rgbr,(m*n+o*p,3))
-"""entrenament del model"""
+
 kmeans = sk.KMeans(n_clusters=4, random_state=0).fit(vectores)
 labels = np.reshape(kmeans.labels_,(240,320,2))
 
 def Segmentacio_100x100(img):
-    """funcio que troba el centre de massa de la imatge y retalla la imatge a 100x100 pixels 
-    amb aquest punt al centre als tres canals RGB y retorna la imatge RGB retallada"""
+    """finds center of mass form the image and crops the image to a 100x100 pixel rgb image  """
     r,l,n = img.shape
     vector_predict = np.reshape(img,(r*l,3))
     predict = np.reshape(kmeans.predict(vector_predict),(240,320))
@@ -52,8 +51,7 @@ def Segmentacio_100x100(img):
 
 
 def files_to_images_saved(folder_dir1,folder_dir2):
-    """extrau les imatges RGB d'una carpeta les segmenta i les torna a guardar amb una altre nom
-    a un altre carpeta """
+    """extracts the image from a folder and applies the segmentation """
     data_path = os.path.join(folder_dir1,'*g')
     src_fname, ext = os.path.splitext(data_path)
     files = glob.glob(data_path)
@@ -67,7 +65,7 @@ def files_to_images_saved(folder_dir1,folder_dir2):
 
 
 folders = list(('\EOSINOPHIL','\ZEUTROPHIL','\LYMPHOCYTE','\MONOCYTE'))
-"""bucles per realitzar la segmentacio en totes les imatges del dataset"""
+
 for i in folders:
     """INDICAR DIRECCIO DE  LES CARPETES"""
     """img_dir es la d'origen y img_dir_2 es on es guardaran les imatges"""
